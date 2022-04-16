@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/the_grove/static/css/main.073c9b0a.css",
-    "main.js": "/the_grove/static/js/main.96836b35.js",
+    "main.js": "/the_grove/static/js/main.b78724d0.js",
     "static/js/787.a233e361.chunk.js": "/the_grove/static/js/787.a233e361.chunk.js",
     "static/media/logo.svg": "/the_grove/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/the_grove/index.html",
     "main.073c9b0a.css.map": "/the_grove/static/css/main.073c9b0a.css.map",
-    "main.96836b35.js.map": "/the_grove/static/js/main.96836b35.js.map",
+    "main.b78724d0.js.map": "/the_grove/static/js/main.b78724d0.js.map",
     "787.a233e361.chunk.js.map": "/the_grove/static/js/787.a233e361.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.96836b35.js"
+    "static/js/main.b78724d0.js"
   ]
 }
