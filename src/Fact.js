@@ -22,16 +22,18 @@ function Fact({ updateResult, allowEdits }) {
   const [res, setRes] = useState(null);
 
   const checkResult = useCallback((event) => {
-    const res = event.target.value;
-    const c = (res === (sign ? a + b : b - a)) ? true : false;
-    setRes(res);
-    if (c && (c!==isCorrect)) {
-      updateResult(1);
+    const newRes = event.target.value;
+    const c = (newRes === (sign ? a + b : b - a)) ? true : false;
+    let update = 0;
+    if (c && (c !== isCorrect)) {
+      update = 1;
     } else if (isCorrect && !c) {
-      updateResult(-1);
+      update = -1
     }
+    updateResult(update, res === null ? 1 : 0);
+    setRes(newRes);
     setIsCorrect(c);
-  }, [sign, a, b, isCorrect, updateResult]);
+  }, [sign, a, b, isCorrect, updateResult, res]);
 
   return (
     <Box elevation={3} sx={{ fontSize: '1.5rem' }}>
@@ -41,7 +43,7 @@ function Fact({ updateResult, allowEdits }) {
         label="Answer"
         onChange={checkResult}
         sx={{ m: 1 }}
-        disabled={!allowEdits && (res !== null)}
+        disabled={(!allowEdits && (res !== null)) || isCorrect === true}
       >
         {[...Array(30).keys()].map(i =>
           <MenuItem value={i} sx={{ fontSize: '1.5rem' }} > {i}</MenuItem>)}
