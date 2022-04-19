@@ -19,7 +19,7 @@ function App() {
         <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px,1fr))' }}>
           {[...Array(total).keys()].map(_i => <Fact updateResult={updateResult} allowEdits={allowEdits} />)}
         </Box>
-        <Box sx={{ fontSize: '2rem' }}>{numberCorrect} /{numberDone} / {total}</Box>
+        <Box sx={{ fontSize: '2rem' }}>{numberCorrect} / {total}</Box>
         {(numberDone === total) && <Button variant="contained" disabled={allowEdits} color='warning' onClick={() => setAllowEdits(true)} sx={{ m: 2 }}>Try Again</Button>}
         <Button variant="contained" onClick={() => window.location.reload()} sx={{ m: 2 }}>Try More</Button>
       </Paper>
