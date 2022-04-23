@@ -4,7 +4,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Box, Select, MenuItem } from '@mui/material';
 
-function Fact({ updateResult, allowEdits }) {
+function Fact({ updateResult, allowEdits, reload }) {
   const [a, b, sign] = useMemo(() => {
     const sign = Math.random() > 0.5;
     let a, b;
@@ -16,7 +16,8 @@ function Fact({ updateResult, allowEdits }) {
       b = Math.ceil(Math.random() * 10) + a;
     }
     return [a, b, sign];
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reload]);
 
   const [isCorrect, setIsCorrect] = useState(null);
   const [res, setRes] = useState(null);

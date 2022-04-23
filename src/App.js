@@ -1,28 +1,29 @@
 import './App.css';
-import { useCallback, useState } from 'react';
-import { Box, Button, Paper } from '@mui/material';
-import Fact from './Fact';
+import { useState } from 'react';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import Facts from './Facts';
+import Mandarin from './Mandarin';
+import CalculateIcon from '@mui/icons-material/Calculate';
+import TranslateIcon from '@mui/icons-material/Translate';
 
 function App() {
-  const total = 12;
-  const [numberCorrect, setNumberCorrect] = useState(0);
-  const [numberDone, setNumberDone] = useState(0);
-  const [allowEdits, setAllowEdits] = useState(false);
-  const updateResult = useCallback((correct, done) => {
-    setNumberCorrect(numberCorrect + correct);
-    setNumberDone(numberDone + done);
-  }, [numberCorrect, numberDone]);
+  const [page, setPage] = useState('Facts');
 
   return (
-    <div className="App">
-      <Paper elevation={3} sx={{ m: 1 }}>
-        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px,1fr))' }}>
-          {[...Array(total).keys()].map(_i => <Fact updateResult={updateResult} allowEdits={allowEdits} />)}
-        </Box>
-        <Box sx={{ fontSize: '2rem' }}>{numberCorrect} / {total}</Box>
-        {(numberDone === total) && <Button variant="contained" disabled={allowEdits} color='warning' onClick={() => setAllowEdits(true)} sx={{ m: 2 }}>Try Again</Button>}
-        <Button variant="contained" onClick={() => window.location.reload()} sx={{ m: 2 }}>Try More</Button>
-      </Paper>
+    <div className="App" style={{ paddingBottom: '56px' }}>
+      {page === 'Facts' && <Facts />}
+      {page === 'Mandarin' && <Mandarin />}
+      <BottomNavigation
+        showLabels
+        value={page}
+        onChange={(event, newValue) => {
+          setPage(newValue);
+        }}
+        sx={{ width: '100%', position: 'fixed', bottom: 0 }}
+      >
+        <BottomNavigationAction label="Math Facts" value="Facts" icon={<CalculateIcon />} />
+        <BottomNavigationAction label="Mandarin" value="Mandarin" icon={<TranslateIcon />} />
+      </BottomNavigation>
     </div>
   );
 }
