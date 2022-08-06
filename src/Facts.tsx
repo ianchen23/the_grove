@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Box, Button, Paper } from '@mui/material';
 import Fact from './Fact';
+import React from 'react';
 
 function Facts() {
   const total = 12;
@@ -8,7 +9,7 @@ function Facts() {
   const [numberDone, setNumberDone] = useState(0);
   const [reload, setReload] = useState(true);
   const [allowEdits, setAllowEdits] = useState(false);
-  const updateResult = useCallback((correct, done) => {
+  const updateResult = useCallback((correct: number, done: number) => {
     setNumberCorrect(numberCorrect + correct);
     setNumberDone(numberDone + done);
   }, [numberCorrect, numberDone]);
@@ -20,7 +21,7 @@ function Facts() {
       </Box>
       <Box sx={{ fontSize: '2rem' }}>{numberCorrect} / {total}</Box>
       {(numberDone === total) && <Button variant="contained" disabled={allowEdits} color='warning' onClick={() => setAllowEdits(true)} sx={{ m: 2 }}>Try Again</Button>}
-      <Button variant="contained" onClick={() => setReload(!reload)} sx={{ m: 2 }}>Try More</Button>
+      <Button variant="contained" onClick={() => { setReload(!reload); setAllowEdits(false); setNumberCorrect(0); setNumberDone(0); }} sx={{ m: 2 }}>Try More</Button>
     </Paper>
   );
 }

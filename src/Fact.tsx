@@ -4,7 +4,9 @@ import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Box, Select, MenuItem } from '@mui/material';
 
-function Fact({ updateResult, allowEdits, reload }) {
+type Props = { updateResult: (correct: number, done: number) => void, allowEdits: boolean, reload: boolean };
+
+function Fact({ updateResult, allowEdits, reload }: Props) {
   const [a, b, sign] = useMemo(() => {
     const sign = Math.random() > 0.5;
     let a, b;
@@ -16,17 +18,17 @@ function Fact({ updateResult, allowEdits, reload }) {
       b = Math.ceil(Math.random() * 10) + a;
     }
     return [a, b, sign];
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reload]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const [isCorrect, setIsCorrect] = useState(null);
+  const [isCorrect, setIsCorrect] = useState<boolean>(false);
   const [res, setRes] = useState(null);
 
-  const checkResult = useCallback((event) => {
+  const checkResult = useCallback((event: { target: { value: any; }; }) => {
     const newRes = event.target.value;
     const c = (newRes === (sign ? a + b : b - a)) ? true : false;
     let update = 0;
-    if (c && (c !== isCorrect)) {
+    if (c != null && (c !== isCorrect)) {
       update = 1;
     } else if (isCorrect && !c) {
       update = -1
@@ -37,7 +39,7 @@ function Fact({ updateResult, allowEdits, reload }) {
   }, [sign, a, b, isCorrect, updateResult, res]);
 
   return (
-    <Box elevation={3} sx={{ fontSize: '1.5rem' }}>
+    <Box sx={{ fontSize: '1.5rem' }}>
       {b} {sign ? "+" : "-"} {a} =
       <Select
         value={res}
