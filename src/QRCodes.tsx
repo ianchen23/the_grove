@@ -6,7 +6,7 @@ function QRCodes() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [code, setCode] = useState<string>('1楼');
 
-  const arr = ["开门", "关门", "B1楼", ...[...Array.from(Array(38).keys())].map(i => (i + 1).toString() + '楼')];
+  const arr = ["开门", "关门", "上", "下", "B1楼", ...[...Array.from(Array(38).keys())].map(i => (i + 1).toString() + '楼')];
   return (
     <div>
       {arr.map(i => (
@@ -28,7 +28,7 @@ function QRCodes() {
           p: 4,
         }}>
           <Box sx={{ display: 'grid', gridTemplateRows: 'auto auto', justifyItems: 'center' }}>
-            <Box fontSize={30}>{code}</Box>
+            <Box fontSize={30} color="primary.main" >{code}</Box>
             <Box component='img' src={require(`./assets/qr_codes/${code}.png`)} />
           </Box>
         </Paper>
