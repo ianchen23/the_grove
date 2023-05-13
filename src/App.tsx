@@ -12,7 +12,7 @@ import QRCodes from './QRCodes';
 
 function App() {
   return (
-    <QRCodes />
+    <div>Hello World</div>
   );
 }
 
